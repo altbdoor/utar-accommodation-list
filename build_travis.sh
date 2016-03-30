@@ -29,4 +29,4 @@ git add .
 git commit -m "[Travis] updated data on $timestamp"
 
 echo "Pushing"
-git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+git push --force --quiet "https://altbdoor:${GH_TOKEN}@github.com/altbdoor/utar-accommodation-list.git" master:gh-pages
