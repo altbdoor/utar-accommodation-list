@@ -21,7 +21,7 @@ git config user.email "lancersupraskyline@gmail.com"
 
 # update index html
 timestamp=$(date '+%d %B %Y')
-sed -i "s/{{ update_date }}/$timestamp/g" gh-pages/index.html
+sed -i "s/{{ update_date }}/$timestamp/g" ./gh-pages/index.html
 
 # commit
 timestamp=$(date '+%Y-%m-%dT%H:%M:%S%z')
