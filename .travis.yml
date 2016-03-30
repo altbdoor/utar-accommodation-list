@@ -1,0 +1,11 @@
+script: bash ./build_travis.sh
+language: python
+python:
+  - 2.7
+branches:
+  only:
+    - master
+env:
+  global:
+    - GH_REF=github.com/altbdoor/utar-accommodation-list.git
+    - secure=lTqZeb3dDPvhq7apCntBWjlxwOH2Jo9pZzRx9ieLktsi7iUKHvMNQ4HzrqIcb7/S/F0UYOX6gK7DOmhG3pBHnlo8yI+ha6JCsnsQgkKyqke6Jk2Euing4l6xYBxcJPL8PBloQLYjzXnme5S1fjZkTf1Ll7sh1P9s9MnIYgcOh8UrsE4pBM94teRoMlXsPO69Y9YeJvqZCPkR+qqGeEhpCkx923UWrzIcnpckFj2mTkTaXLpuFBEKCZtLfVtYwGjdi6dVYbhtYyxU5X6IIQ9F3FQlKmwEqBG/FUK4bpTdLqOIXdBLH1g3XUPbDL8dLmbpYxhuoy2K1OmxTOB7NurIjx9gpil3bo2xz/S+v+Vk8KlfNJ1UtesGhvxnpk6sqUiEBN9g8NbLp1VsrzU5kwydqag6x+8LaJ2t1c1OrBlpqor04HnBc/vWmPg1nST5jJBPbUU0A5Mqx1E0q+r4rqHthKgycYxZ353vbfYcUFee2M3u4u2wNMya2bQRSCsfElswe1xPTxnOO4eY4SQRPkrCdei3B5oKxOk7WgIX1E1oZa/0cwzeoJ4LlJW3m2L9b1/K6lbkR/ck6sgPyNhtOPb1N31qDjteO9rOCfK3U+hnB5A8a1o+miHyVqIeOyfpfrdgWCAf88xvm/vgzVWY13yR4D9/CxCxxwD8dzydXTIVhV8=
