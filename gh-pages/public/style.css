@@ -1,0 +1,17 @@
+/* elements */
+html {overflow-y:scroll; min-width:320px}
+body {padding:50px 0}
+h1 {margin-top:0}
+
+/* bootstrap */
+.alert {padding:5px 10px; margin-bottom:10px}
+.form-group {padding-top:15px}
+
+/* custom */
+#content {padding:50px 0}
+#generator-form {margin:15px 0; padding:15px 0; border-width:1px 0; border-style:solid; border-color:#eee}
+
+#results-container > .panel > .panel-heading {display:block; text-decoration:none}
+.label-master {background-color:#d9534f}
+.label-middle {background-color:#5cb85c}
+.label-small {background-color:#337ab7}

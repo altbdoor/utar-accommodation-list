@@ -3,9 +3,7 @@
 
 from os.path import dirname, join
 import json
-import os
 import re
-import shutil
 import sys
 import urllib2
 
@@ -22,12 +20,7 @@ def remove_empty_string_and_nbsp_in_list (_list):
 # set path
 print 'Cleaning up and setting paths'
 current_path = dirname(__file__)
-data_path = join(current_path, 'data')
-
-if os.path.exists(data_path):
-	shutil.rmtree(data_path)
-
-os.makedirs(data_path)
+data_path = join(current_path, 'gh-pages/data')
 
 
 # import bs4
@@ -156,8 +149,8 @@ for location_full_name, location_code in locations.iteritems():
 	# write to json
 	f = open(current_data_path, 'w')
 	f.truncate()
-	# f.write(json.dumps(current_data_json, indent=4))
-	f.write(json.dumps(current_data_json))
+	f.write(json.dumps(current_data_json, indent=4))
+	# f.write(json.dumps(current_data_json))
 	f.close()
 
 print 'Done'
