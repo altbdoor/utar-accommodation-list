@@ -11,6 +11,20 @@
 		results = $('#results-container'),
 		template = $('#results-template').html();
 	
+	$.ajax({
+		beforeSend: function (request) {
+			request.setRequestHeader('Accept', 'application/vnd.github.v3+json');
+		},
+		dataType: 'json',
+		url: 'https://api.github.com/repos/altbdoor/utar-accommodation-list/git/refs/heads/gh-pages',
+		success: function (data) {
+			var commit = data.object.sha;
+			
+			cdnPath = '//cdn.rawgit.com/altbdoor/utar-accommodation-list/' + commit + '/';
+			$(campus).removeAttr('disabled').trigger('change');
+		}
+	});
+	
 	$(campus).on('change', function () {
 		var campusVal = $(this).val();
 		
@@ -83,7 +97,7 @@
 			});
 			
 		}
-	}).trigger('change');
+	});
 	
 	$('#generator-form').on('change keyup', 'input', function () {
 		var typeList = [],
