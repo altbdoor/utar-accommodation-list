@@ -4,7 +4,7 @@
 set -e
 
 # remake the dir
-echo "Cleaning dir"
+echo "Cleaning up"
 rm -rf ./gh-pages/data
 mkdir ./gh-pages/data
 
@@ -20,7 +20,7 @@ git config user.name "altbdoor"
 git config user.email "lancersupraskyline@gmail.com"
 
 # update index html
-timestamp=$(date '+%d %B %Y')
+timestamp=$(date --utc '+%d %B %Y, %R %Z')
 sed -i "s/{{ update_date }}/$timestamp/g" ./index.html
 
 # commit

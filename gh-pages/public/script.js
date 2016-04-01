@@ -48,12 +48,24 @@
 						currentData['dataPriceMin'] = priceList[0];
 						currentData['dataPriceMax'] = priceList[priceList.length - 1];
 						
-						if (currentData['office'] != 'N/A') {
-							currentData['office'] = '<a href="tel:+6' + currentData['office'] + '">' + currentData['office'] + '</a>';
+						if (currentData['office'].length != 0) {
+							currentData['office'] = $.map(currentData['office'], function (item) {
+								return '<a href="tel:+6' + item + '">' + item + '</a>';
+							}).join('<br>');
 						}
-						if (currentData['mobile'] != 'N/A') {
-							currentData['mobile'] = '<a href="tel:+6' + currentData['mobile'] + '">' + currentData['mobile'] + '</a>';
+						else {
+							currentData['office'] = 'N/A';
 						}
+						
+						if (currentData['mobile'].length != 0) {
+							currentData['mobile'] = $.map(currentData['mobile'], function (item) {
+								return '<a href="tel:+6' + item + '">' + item + '</a>';
+							}).join('<br>');
+						}
+						else {
+							currentData['mobile'] = 'N/A';
+						}
+						
 						if (currentData['email'] != 'N/A') {
 							currentData['email'] = '<a href="mailto:' + currentData['email'] + '">' + currentData['email'] + '</a>';
 						}

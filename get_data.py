@@ -15,10 +15,15 @@ def unicode_and_strip (_str):
 def remove_empty_string_and_nbsp_in_list (_list):
 	return [ unicode_and_strip(x).replace(u'\xa0', u' ') for x in _list if unicode_and_strip(x) ]
 
+def split_multiples_info (_str):
+	return remove_empty_string_and_nbsp_in_list(
+		re.compile('[^0-9]').split(_str)
+	)
+
 # ========================================
 
 # set path
-print 'Cleaning up and setting paths'
+print 'Setting paths'
 current_path = dirname(__file__)
 data_path = join(current_path, 'gh-pages/data')
 
@@ -81,8 +86,8 @@ for location_full_name, location_code in locations.iteritems():
 				'name': cols[1].find('strong').contents[0],
 				'link': cols[1].find('a')['href'],
 				
-				'office': 'N/A',
-				'mobile': 'N/A',
+				'office': [],
+				'mobile': [],
 				'email': 'N/A',
 				
 				'info': [],
@@ -97,18 +102,18 @@ for location_full_name, location_code in locations.iteritems():
 			# contact
 			temp = cols[1].find('b', text='H/P No.:')
 			if temp is not None:
-				current_row['mobile'] = unicode_and_strip(temp.next_sibling)
+				current_row['mobile'] = split_multiples_info(temp.next_sibling)
 			
 			temp = cols[1].find('b', text='Office No.:')
 			if temp is not None:
-				current_row['office'] = unicode_and_strip(temp.next_sibling)
+				current_row['office'] = split_multiples_info(temp.next_sibling)
 			
 			temp = cols[1].find('b', text='Email:')
 			if temp is not None:
 				current_row['email'] = unicode_and_strip(temp.next_sibling)
 			
 			# if no means of contact, why bother?
-			if current_row['office'] == 'N/A' and current_row['mobile'] == 'N/A' and current_row['email'] == 'N/A':
+			if len(current_row['office']) == 0 and len(current_row['mobile']) == 0 and current_row['email'] == 'N/A':
 				continue
 			
 			# info
@@ -149,8 +154,8 @@ for location_full_name, location_code in locations.iteritems():
 	# write to json
 	f = open(current_data_path, 'w')
 	f.truncate()
-	f.write(json.dumps(current_data_json, indent=4))
-	# f.write(json.dumps(current_data_json))
+	# f.write(json.dumps(current_data_json, indent=4))
+	f.write(json.dumps(current_data_json))
 	f.close()
 
 print 'Done'
