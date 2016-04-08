@@ -25,7 +25,7 @@ def split_multiples_info (_str):
 # set path
 print 'Setting paths'
 current_path = dirname(__file__)
-data_path = join(current_path, 'gh-pages/data')
+data_path = join(current_path, 'travis_data')
 
 
 # import bs4
