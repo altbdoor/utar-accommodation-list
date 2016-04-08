@@ -30,3 +30,14 @@ git commit -m "[Travis] updated data on $timestamp"
 
 echo "Pushing"
 git push --force --quiet "https://altbdoor:${GH_TOKEN}@github.com/altbdoor/utar-accommodation-list.git" master:gh-pages > /dev/null 2>&1
+
+# bump rawgit
+echo "Bumping RawGit"
+commit=$(git log --format=format:%H -1)
+
+rawgit_url="http://cdn.rawgit.com/altbdoor/utar-accommodation-list/$commit"
+declare -a data_list=("btho" "kp" "sl")
+
+for i in "${arr[@]}"; do
+	curl -s -I "$rawgit_url/data/$i.json" > /dev/null
+done
