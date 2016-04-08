@@ -39,7 +39,7 @@
 		updateResultCount();
 		
 		if (campusVal) {
-			$.getJSON(cdnPath + 'data/' + campusVal + '.json', function (data) {
+			$.getJSON(cdnPath + '/' + campusVal + '.json', function (data) {
 				var resultsHtml = '';
 				
 				for (var key in data) {
