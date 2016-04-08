@@ -16,12 +16,19 @@
 			request.setRequestHeader('Accept', 'application/vnd.github.v3+json');
 		},
 		dataType: 'json',
-		url: 'https://api.github.com/repos/altbdoor/utar-accommodation-list/git/refs/heads/gh-pages',
+		url: 'https://api.github.com/repos/altbdoor/utar-accommodation-list/git/refs/heads/travis_data',
 		success: function (data) {
 			var commit = data.object.sha;
 			
 			cdnPath = '//cdn.rawgit.com/altbdoor/utar-accommodation-list/' + commit + '/';
 			$(campus).removeAttr('disabled').trigger('change');
+			
+			$.getJSON('https://api.github.com/repos/altbdoor/utar-accommodation-list/git/commits/' + commit, function (dataJ) {
+				var time = Date.parse(dataJ.author.date),
+					date = new Date(time);
+				
+				$('#commit-time').text(date.toUTCString());
+			});
 		}
 	});
 	
