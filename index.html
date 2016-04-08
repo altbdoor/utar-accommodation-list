@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>UTAR Accommodation List · altbdoor.github.io</title>
+	
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="public/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2">
+				<h1>UTAR Accommodation List</h1>
+				<h4>A more pleasant search interface</h4>
+				
+				<form id="generator-form" class="form-horizontal hidden-print">
+					<div class="alert alert-info small">
+						This site attempts to provide a more pleasant search interface for the <a class="alert-link" href="http://www.utar.edu.my/accomList.jsp">original UTAR Accommodation List</a> with some extra links. It is not affiliated to UTAR in any form or way. All data from the original site is obtained manually, and therefore, might not be up to date.
+						
+						Data is last updated on <u>08 April 2016, 01:59 UTC</u>.
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Campus</label>
+						<div class="col-sm-9">
+							<select id="form-campus" class="form-control" disabled>
+								<option value="" selected disabled>-- Please select campus --</option>
+								<option value="btho">Bandar Tun Hussein Onn / Mahkota Cheras / Balakong / Kajang</option>
+								<option value="kp">Kampar</option>
+								<option value="sl">Bandar Sungai Long</option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Type</label>
+						<div class="col-sm-9">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" value="room" checked class="form-filter-type">
+									Room
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" value="roomate" checked class="form-filter-type">
+									Room mate
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" value="apartment_condominium" checked class="form-filter-type">
+									Apartment/Condominium
+								</label>
+							</div>
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" value="house" checked class="form-filter-type">
+									House
+								</label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Price (RM)</label>
+						<div class="col-sm-9">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="input-group">
+										<span class="input-group-addon">Min:</span>
+										<input type="number" min="0" step="1" id="form-filter-price-min" class="form-control" value="0">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<br class="visible-xs-inline">
+									<div class="input-group">
+										<span class="input-group-addon">Max:</span>
+										<input type="number" min="0" step="1" id="form-filter-price-max" class="form-control" value="0">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Address</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="form-filter-address">
+						</div>
+					</div>
+				</form>
+				
+				<div class="row">
+					<div class="col-sm-6">
+						<h4>
+							<span id="result-count">0</span>
+							Result(s)
+						</h4>
+					</div>
+					<div class="col-sm-6 hidden-xs text-right hidden-print">
+						<button id="results-toggle-all" class="btn btn-default" data-mode="0">
+							Show / Hide All Information
+						</button>
+					</div>
+				</div>
+				
+				
+				<div id="results-container" class="panel-group"></div>
+				
+				<hr>
+				
+				<div class="text-center small text-muted">
+					<ul class="list list-inline">
+						<li><a href="https://github.com/altbdoor/utar-accommodation-list/">GitHub</a></li>
+						<li><a href="http://getbootstrap.com/">Bootstrap</a></li>
+						<li><a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a></li>
+						<li><a href="https://travis-ci.org/">Travis CI</a></li>
+						<li><a href="https://nightli.es/">Nightli.es</a></li>
+						<li><a href="http://rawgit.com/">RawGit</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script id="results-template" type="text/plain">
+		<div class="panel panel-default" data-type="{{ type }}" data-price-min="{{ dataPriceMin }}" data-price-max="{{ dataPriceMax }}">
+			<a href="javascript:void(0)" class="panel-heading">
+				<b class="panel-address">{{ address }}</b><br>
+				{{ price }}
+			</a>
+			<div class="panel-collapse collapse">
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-4">
+							<dl>
+								<dt>Name</dt>
+								<dd>{{ name }}</dd>
+								
+								<dt>Office No.</dt>
+								<dd>{{ office }}</dd>
+								
+								<dt>Mobile No.</dt>
+								<dd>{{ mobile }}</dd>
+								
+								<dt>Email</dt>
+								<dd>{{ email }}</dd>
+							</dl>
+						</div>
+						<div class="col-sm-8">
+							<b>Information</b>:
+							<ul>{{ info }}</ul>
+							
+							<b>Remarks</b>:
+							<ul>{{ remark }}</ul>
+							
+							<a target="_blank" href="http://www.utar.edu.my/{{ link }}">
+								&raquo; View Full Details in UTAR
+							</a>
+							<br>
+							<a target="_blank" href="https://www.google.com/maps?q={{ googleMapLink }}">
+								&raquo; Find Address in Google Maps
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</script>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="public/script.js"></script>
+</body>
+</html>
